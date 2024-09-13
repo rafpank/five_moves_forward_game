@@ -33,6 +33,12 @@ reward_for_chest = {chest_colour_list[reward]: (reward+1) * (reward+1) * 1000 fo
 moves = 5
 accumulated_gold = 0
 
+def award_modification(scores, percent_range=10):
+    adjustment = scores * percent_range/100
+    lowest_scores = int(scores - adjustment)
+    highest_scores = int(scores + adjustment)
+    return random.randint(lowest_scores, highest_scores)
+
 while moves > 0:
     gamer_answer = input("Do you want to go forward? [Y/N] ").upper()
     if gamer_answer == "Y":
@@ -40,8 +46,10 @@ while moves > 0:
         drawn_event = random.choices(event_list, event_probability)[0]
         if drawn_event == 'Chest':
             drawn_chest_clour = random.choices(chest_colour_list,chest_colour_probability)[0]
-            print(f"Excellent you have drawn {drawn_chest_clour.name} {drawn_event} and therefore recive {reward_for_chest[drawn_chest_clour]} gold pieces")
-            accumulated_gold += reward_for_chest[drawn_chest_clour]
+            single_reward = reward_for_chest[drawn_chest_clour]
+            single_award = award_modification(single_reward)
+            print(f"Excellent you have drawn {drawn_chest_clour.name} {drawn_event} and therefore recive {single_award} gold pieces")
+            accumulated_gold += single_award
         elif drawn_event == 'Nothing':
             print(f'Unfortunately you were bad luck this time because you drew {drawn_event}')
     
