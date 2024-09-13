@@ -5,12 +5,24 @@ print("""   Welcome to the chest game!
 You have five moves ahead to find out 
   how much gold you can collect.""")
 
+Event = Enum('Event', ['Chest', 'Nothing'])
+
+event_dictionary = {'Chest': 0.6,
+                    'Nothing': 0.4
+                    }
+event_list = list(event_dictionary.keys())
+event_probability = list(event_dictionary.values())
+
+
 moves = 5
 
 while moves > 0:
     gamer_answer = input("Do you want to go forward? [Y/N] ").upper()
     if gamer_answer == "Y":
         print("Greate! Let's see what you get")
+        drawn_event = random.choices(event_list, event_probability)[0]
+        print(drawn_event)
     else:
         print("Sorry friend, You've got no choice but only to move forward in this game, so please give it another try.")
+        continue
     moves -= 1
