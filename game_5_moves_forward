@@ -1,0 +1,16 @@
+import random
+from enum import Enum
+
+print("""   Welcome to the chest game!
+You have five moves ahead to find out 
+  how much gold you can collect.""")
+
+moves = 5
+
+while moves > 0:
+    gamer_answer = input("Do you want to go forward? [Y/N] ").upper()
+    if gamer_answer == "Y":
+        print("Greate! Let's see what you get")
+    else:
+        print("Sorry friend, You've got no choice but only to move forward in this game, so please give it another try.")
+    moves -= 1
