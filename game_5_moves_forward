@@ -13,6 +13,19 @@ event_dictionary = {'Chest': 0.6,
 event_list = list(event_dictionary.keys())
 event_probability = list(event_dictionary.values())
 
+Colours = Enum('Colors', { 'Green' : 'green',
+                          'Orange' : 'orange',
+                          'Purple' : 'purple',
+                          'Gold' : 'gold'
+                          })
+
+chest_colour_dictionary = { Colours.Green : 0.75,
+                          Colours.Orange : 0.2,
+                          Colours.Purple : 0.04,
+                          Colours.Gold : 0.01}
+
+chest_colour_list = list(chest_colour_dictionary.keys())
+chest_colour_probability = list(chest_colour_dictionary.values())
 
 moves = 5
 
@@ -21,7 +34,12 @@ while moves > 0:
     if gamer_answer == "Y":
         print("Greate! Let's see what you get")
         drawn_event = random.choices(event_list, event_probability)[0]
-        print(drawn_event)
+        if drawn_event == 'Chest':
+            drawn_chest_clour = random.choices(chest_colour_list,chest_colour_probability)[0]
+            print(f"Excellent you have drawn {drawn_chest_clour.name} {drawn_event}")
+        elif drawn_event == 'Nothing':
+            print(f'Unfortunately you were bad luck this time because you drew {drawn_event}')
+    
     else:
         print("Sorry friend, You've got no choice but only to move forward in this game, so please give it another try.")
         continue
